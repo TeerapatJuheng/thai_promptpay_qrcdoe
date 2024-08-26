@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const promptpay = require('promptpay-qr');
 
 const app = express();
-const port = 3001; // Change to a different port
+const port = 3000; // Change to a different port
 
 app.use(bodyParser.json());
 
