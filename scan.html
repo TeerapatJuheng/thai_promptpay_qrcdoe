@@ -11,46 +11,57 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        h1 {
             text-align: center;
-            color: #333;
-            margin-bottom: 20px;
+            padding: 20px;
         }
-        #qr-container {
-            text-align: center;
+        header, footer {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
         }
-        #qr-image {
+        footer {
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+        }
+        #imgqr {
             max-width: 100%;
             height: auto;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: white;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: block;
+            margin: 20px auto;
         }
     </style>
 </head>
 <body>
-    <div id="qr-container">
-        <h1>Scan QR Code</h1>
-        <img src="./assets/pay.png" alt="">
-        <img id="qr-image" src="" alt="QR Code">
+    <header>
+        <h1>QR Code Scan</h1>
+    </header>
+
+    <div class="container">
+        <h2>Your QR Code</h2>
+        <img id="imgqr" src="" alt="QR Code">
     </div>
 
+    <footer>
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </footer>
+
     <script>
-        // Extract QR code data from URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const qrData = urlParams.get('qr');
-        
-        if (qrData) {
-            document.getElementById('qr-image').src = qrData;
-        } else {
-            document.getElementById('qr-container').innerHTML = '<p>No QR code data found.</p>';
+        // Function to get query parameters from URL
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // On page load, set QR code image source
+        window.onload = function() {
+            const qrCode = getQueryParam('qr');
+            if (qrCode) {
+                document.getElementById('imgqr').src = qrCode;
+            } else {
+                console.log('No QR code data found.');
+            }
         }
     </script>
 </body>
