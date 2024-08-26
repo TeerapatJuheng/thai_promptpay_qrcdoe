@@ -4,33 +4,167 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generate QRCode</title>
+    <title>Generate QR Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header, footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        footer {
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+        }
+        header nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        header nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            margin-top: 60px; /* Adjust based on header height */
+            margin-bottom: 40px; /* Adjust based on footer height */
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin: 20px 0;
+        }
+        #products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .product {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+            width: 250px;
+            transition: transform 0.2s;
+        }
+        .product:hover {
+            transform: scale(1.05);
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .product p {
+            font-size: 16px;
+            color: #555;
+            margin: 10px 0;
+        }
+        .product button {
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px 15px;
+            transition: background-color 0.3s;
+        }
+        .product button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <input type="text" id="amount" placeholder="amount">
-        <button onclick="genQR()">Generate</button>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Product</h1>
+        <div id="products">
+            <div class="product">
+                <img src="./assets/aes.png" alt="Product 1">
+                <p>arsenal Thried Shirt</p>
+                <p>3400 บาท</p>
+                <button onclick="generateAndRedirect(3400.00)">Buy</button>
+            </div>
+            <div class="product">
+                <img src="./assets/ar.png" alt="Product 2">
+                <p>arsenal Away Shirt</p>
+                <p>3400 บาท</p>
+                <button onclick="generateAndRedirect(3400.00)">Buy</button>
+            </div>
+            <div class="product">
+                <img src="./assets/city.png" alt="Product 3">
+                <p>City Home Shirt</p>
+                <p>3000 บาท</p>
+                <button onclick="generateAndRedirect(3000.00)">Buy</button>
+            </div>
+            <div class="product">
+                <img src="./assets/les.png" alt="Product 4">
+                <p>leicester Home Shirt</p>
+                <p>2000 บาท</p>
+                <button onclick="generateAndRedirect(2000.00)">Buy</button>
+            </div>
+            <div class="product">
+                <img src="./assets/manu.png" alt="Product 5">
+                <p>Manchester United F.C.</p>
+                <p>3200 บาท</p>
+                <button onclick="generateAndRedirect(3200.00)">Buy</button>
+            </div>
+        </div>
     </div>
-    <img id="imgqr" src="" style="width: 500px; object-fit: contain;">
+
+    <footer>
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script>
-        function genQR() {
+        function generateAndRedirect(amount) {
             $.ajax({
-                method: 'post',
+                method: 'POST',
                 url: 'http://localhost:3000/generateQR',
-                data: {
-                    amount: parseFloat($("#amount").val())
-                },
+                data: JSON.stringify({ amount: amount }),
+                contentType: 'application/json',
                 success: function(response) {
-                    console.log('good', response)
-                    $("#imgqr").attr('src', response.Result)
-                }, error: function(err) {
-                    console.log('bad', err)
+                    console.log('Success:', response);
+                    // Redirect to the scan page with QR code data
+                    window.location.href = `scan.html?qr=${encodeURIComponent(response.Result)}`;
+                },
+                error: function(err) {
+                    console.log('Error:', err);
                 }
-            })
+            });
         }
     </script>
-    
 </body>
 </html>

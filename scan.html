@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan QR Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        #qr-container {
+            text-align: center;
+        }
+        #qr-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="qr-container">
+        <h1>Scan QR Code</h1>
+        <img src="./assets/pay.png" alt="">
+        <img id="qr-image" src="" alt="QR Code">
+    </div>
+
+    <script>
+        // Extract QR code data from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const qrData = urlParams.get('qr');
+        
+        if (qrData) {
+            document.getElementById('qr-image').src = qrData;
+        } else {
+            document.getElementById('qr-container').innerHTML = '<p>No QR code data found.</p>';
+        }
+    </script>
+</body>
+</html>
