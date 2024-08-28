@@ -4,19 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Generate QR Code</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        :root {
+            --pink:var(#e84393)
+        }
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            box-sizing: border-box;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            outline: none;
+            border: none;
+            text-decoration: none;
+            text-transform: capitalize;
+            transition: .2s linear;
         }
-        header, footer {
-            background-color: #007bff;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
+        html {
+            font-size: 62.5%;
+            scroll-behavior: smooth;
+            scroll-padding-top: 6rem;
+            overflow-x: hidden;
+        }
+        header{
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: #fff;
+            padding: 2rem 9%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* z-index: 1; */
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
         }
         header {
             position: fixed;
@@ -37,7 +57,7 @@
             gap: 20px;
         }
         header nav a {
-            color: white;
+            color: var(--pink);
             text-decoration: none;
             font-weight: bold;
         }
@@ -125,11 +145,17 @@
 </head>
 <body>
     <header>
-        <nav>
+        <a href="#"><img src="./assets/logo.png" alt="Logo"></a>
+        <nav class="navbar">
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
         </nav>
+        <dir>
+            <a href="#" class="fas fa-heart"></a>
+            <a href="#" class="fas fa-shopping-cart"></a>
+            <a href="#" class="fas fa-user"></a>
+        </dir>
     </header>
 
     <div class="container">
@@ -141,31 +167,31 @@
                 <img src="./assets/aes.png" alt="Product 1">
                 <p>Arsenal Third Shirt</p>
                 <p>3400 บาท</p>
-                <button onclick="generateAndRedirect(3400.00)">Buy</button>
+                <button onclick="generateAndRedirect(1.00)">Buy</button>
             </div>
             <div class="product">
                 <img src="./assets/ar.png" alt="Product 2">
                 <p>Arsenal Away Shirt</p>
                 <p>3400 บาท</p>
-                <button onclick="generateAndRedirect(3400.00)">Buy</button>
+                <button onclick="generateAndRedirect(1.00)">Buy</button>
             </div>
             <div class="product">
                 <img src="./assets/city.png" alt="Product 3">
                 <p>City Home Shirt</p>
                 <p>3000 บาท</p>
-                <button onclick="generateAndRedirect(3000.00)">Buy</button>
+                <button onclick="generateAndRedirect(1.00)">Buy</button>
             </div>
             <div class="product">
                 <img src="./assets/les.png" alt="Product 4">
                 <p>Leicester Home Shirt</p>
                 <p>2000 บาท</p>
-                <button onclick="generateAndRedirect(2000.00)">Buy</button>
+                <button onclick="generateAndRedirect(1.00)">Buy</button>
             </div>
             <div class="product">
                 <img src="./assets/manu.png" alt="Product 5">
                 <p>Manchester United F.C.</p>
                 <p>3200 บาท</p>
-                <button onclick="generateAndRedirect(3200.00)">Buy</button>
+                <button onclick="generateAndRedirect(1.00)">Buy</button>
             </div>
         </div>
     </div>
